@@ -1,0 +1,88 @@
+﻿@page "/"
+@using BlazorDemo.Components
+<div class="d-flex justify-content-between p-1">
+    <h2>Operations</h2>
+    <button @onclick="QuickAddOperation" class="btn btn-primary table-btn quick-add-btn add-btn">Add Operation</button>
+</div>
+
+
+@if (Operations == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Order</th>
+                <th>Image of device</th>
+                <th>Device</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var operation in Operations.ToList())
+            {
+                string imgUrl=string.Empty;
+                if (operation?.ImageData != null)
+                {
+                    imgUrl = $"data:image;base64,{Convert.ToBase64String(operation.ImageData)}";
+                }
+
+                <tr>
+                    <td>@operation.Name</td>
+                    <td>@operation.OrderInWhichToPerform</td>
+                    <td><img src=@imgUrl  width="40" height="40"/></td>
+                    <td>@operation.Device</td>
+                    <td><button @onclick="() => DeleteOperation(operation)" class="btn btn-primary table-btn quick-add-btn delete-btn">Delete</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <AddOperationsDialog @ref="AddOperationsDialog" CloseEventCallback="@AddOperationsDialog_OnDialogClose">
+    </AddOperationsDialog>
+}
+
+
+<br />
+<hr />
+<br />
+
+<div class="d-flex justify-content-between p-1">
+    <h2>Devices</h2>
+    <button @onclick="QuickAddDevice" class="btn btn-primary table-btn quick-add-btn add-btn">Add Device</button>
+</div>
+
+@if (Devices == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Device type</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var device in Devices.ToList())
+            {
+                <tr>
+                    <td>@device.Name</td>
+                    <td>@device.DeviceType</td>
+
+                    <td><button @onclick="() => DeleteDevice(device)" class="btn btn-primary table-btn quick-add-btn delete-btn">Delete</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <AddDevicesDialog @ref="AddDevicesDialog" CloseEventCallback="@AddDevicesDialog_OnDialogClose">
+    </AddDevicesDialog>
+}
+
+

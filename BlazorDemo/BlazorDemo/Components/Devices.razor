@@ -1,0 +1,17 @@
+﻿@if (DeviceMaster == null)
+{
+    <p>
+        <em>Loading ...</em>
+    </p>
+}
+else
+{
+    <select class="custom-select" @onchange="OnValueChanged" title="Device is required ">
+        <option value="Select" selected disabled="disabled">(Choose Device)</option>
+        @foreach (var device in DeviceMaster)
+        {
+            <option value="@device."> @device.Name</option>
+
+        }
+    </select>
+} 
