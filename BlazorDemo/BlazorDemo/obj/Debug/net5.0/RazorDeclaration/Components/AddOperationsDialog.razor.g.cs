@@ -97,7 +97,7 @@ using BlazorDemo.Components;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 46 "C:\Users\Jake\Downloads\BlazorDemo\BlazorDemo\BlazorDemo\Components\AddOperationsDialog.razor"
+#line 44 "C:\Users\Jake\Downloads\BlazorDemo\BlazorDemo\BlazorDemo\Components\AddOperationsDialog.razor"
           
         string imgUrl = string.Empty;
         private async Task OnFileSelection(InputFileChangeEventArgs e)
@@ -107,7 +107,6 @@ using BlazorDemo.Components;
             Operation.ImageData = buffers;
             await imgFile.OpenReadStream().ReadAsync(buffers);
             string imageType = imgFile.ContentType;
-            //imgUrl = $"data:{imageType};base64,{Convert.ToBase64String(buffers)}";
         }
     
 
